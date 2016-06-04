@@ -1,0 +1,150 @@
+<html>
+  <head>
+    <title>ゴシックは魔法乙女 経験値シミュレータ</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/yeti/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="icon" href="./img/favicon.ico" type="image/vnd.microsoft.icon" />
+  </head>
+  <body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div id="header" class="navbar-header">
+        <h1 class="navbar-brand">
+          ゴシックは魔法乙女 経験値シミュレータ<br>
+          <small>計算結果には誤差がございます．あくまで参考程度にお使いください．</small>
+        </h1>
+      </div>
+    </div>
+  </nav>
+  <div id="wrapper" class="container">
+    <div id="contents" class="container-fluid">
+      <div id="setting" class="panel panel-default">
+        <div class="panel-heading">設定</div>
+        <div id="familiar" class="panel-body">
+          <div class="panel  panel-primary">
+            <div class="panel-heading">
+              <div class="row sampleRow">
+                <div class="col-xs-10">使い魔</div>
+                <div class="col-xs-2" align="right"><button id="familiarClear" class="btn btn-default btn-xs">クリア</button></div>
+              </div>
+            </div>
+            <table class="table">
+              <tr>
+                <th class="info col-xs-3">レアリティ</th>
+                <td class="col-xs-3">
+                  <select id="familiarRarity">
+                    <option value="0">☆1</option>
+                    <option value="1">☆2</option>
+                    <option value="2">☆3</option>
+                    <option value="3">☆4</option>
+                    <option value="4">☆5</option>
+                    <option value="5">転生☆4</option>
+                    <option value="6">転生☆5</option>
+                    <option value="7">転生☆6</option>
+                  </select>
+                </td>
+                <th class="info col-xs-3">進化回数</th>
+                <td class="col-xs-3">
+                  <label class="radio-inline">
+                    <input type="radio" name="fe" id="familiarEvolution" value="0" checked> 0回
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="fe" id="familiarEvolution" value="1"> 1回
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="fe" id="familiarEvolution" value="2"> 2回
+                  </label>
+                </td>
+              </tr>
+              <tr>
+                <th class="info">現在のレベル</th>
+                <td>
+                  <input id="familiarCurrentLv" type="number" value="1" min="1" max="80">
+                </td>
+                <th class="info">現在の経験値（％）</th>
+                <td>
+                  <input id="familiarCurrentExp" type="number" value="0" min="0" max="99">
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="panel  panel-primary">
+            <div class="panel-heading">
+              <div class="row sampleRow">
+                <div class="col-xs-10">合成素材</div>
+                <div class="col-xs-2" align="right"><button id="materialClear" class="btn btn-default btn-xs">クリア</button></div>
+              </div>
+            </div>
+            <table class="table">
+              <tr>
+                <th class="info col-xs-2">同属性</th>
+                <td class="col-xs-10">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon">☆1</span>
+                    <input id="materialHomo1" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆2</span>
+                    <input id="materialHomo2" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆3</span>
+                    <input id="materialHomo3" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆4</span>
+                    <input id="materialHomo4" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆5</span>
+                    <input id="materialHomo5" type="number" class="form-control" value="0" min="0" max="1000">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th class="info col-xs-2">異属性</th>
+                <td class="col-xs-10">
+                  <div class="input-group input-group-sm">
+                    <span class="input-group-addon">☆1</span>
+                    <input id="materialHetero1" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆2</span>
+                    <input id="materialHetero2" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆3</span>
+                    <input id="materialHetero3" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆4</span>
+                    <input id="materialHetero4" type="number" class="form-control" value="0" min="0" max="1000">
+                    <span class="input-group-addon">☆5</span>
+                    <input id="materialHetero5" type="number" class="form-control" value="0" min="0" max="1000">
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="result" class="panel panel-default">
+        <div class="panel-heading">結果</div>
+        <div class="panel-body">
+          <div class="panel panel-primary">
+          <div class="panel-heading">使い魔</div>
+          <table class="table">
+            <tr>
+              <th class="info" class="col-xs-3">Lv</th>
+              <td class="col-xs-3"><div id="familiarLv"></div></td>
+              <th class="info" class="col-xs-3">最大Lvまで</th>
+              <td class="col-xs-3"><div id="familiarMaxRemains"></div></td>
+            </tr>
+            <tr>
+              <th class="info" class="col-xs-3">合成費用</th>
+              <td class="col-xs-3">未実装です<div id="compositionCost"></div></td>
+              <th class="info" class="col-xs-3">獲得経験値</th>
+              <td class="col-xs-3"><div id="gainedExp"></div></td>
+            </tr>
+          </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="footer" class="container-fluid">
+      <div id="powerd">
+      Powered by <a href="http://haste-lang.org">Haste</a>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="gomaotsu.js"></script>
+  </body>
+</html>
